@@ -1,0 +1,34 @@
+Array ADT
+    Array is a basic data structure provided by almost every programming language 
+like C, C++ provides Array as a basic structure. So representation of array is 
+given by the compiler but operation isn't. Now the operation in array is not 
+given by the compiler, we are supposed to provide operation that can be performed 
+in Array. So data structure and a set of operations together, we can call it as ADT.
+
+
+
+Prerequities:
+Declaring an array: 
+    1. int a[10] if index is known. (Static)
+    2. int *a;
+        a = (int *)malloc(n * sizeof(int)); if index is not known.  (Dynamic)
+
+Size of an array:
+    - number of index of an array is called size of an array.
+
+Length of an array:
+    - number of elements in an array is called lenght of an array.
+
+
+
+Operations on Array
+    - Display()
+    - Add(x) / Append(x)
+    - Insert(index, x)
+    - Delete(index)
+    - Search(x)
+    - Get(index)
+    - Set(index, x)
+    - Max() / Min()
+    - Reverse()
+    - Shift() / Rotate(x)
