@@ -24,7 +24,7 @@ int main()
 
     res = fibo(n);
 
-    printf("The fibonacci number is %d term is %d.", n, res);
+    printf("The fibonacci number in %d term is %d.", n, res);
 
     return 0;
 }
