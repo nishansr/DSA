@@ -18,7 +18,7 @@ int main()
 
     res = fact(n);
 
-    printf("The factorial of %d is %d.\n", n, res);
+    printf("The factorial of %d in %d.\n", n, res);
 
     return 0;
 }
