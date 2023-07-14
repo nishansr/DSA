@@ -18,13 +18,15 @@ int fibo(int n)
 }
 int main()
 {
-    int n, res;
+    int i, n;
     printf("Enter the number of terms: ");
     scanf("%d", &n);
 
-    res = fibo(n);
-
-    printf("The fibonacci number in %d term is %d.", n, res);
+    printf("The fibonacci number upto %d term i:\n", n);
+    for (i = 0; i < n; i++)
+    {
+        printf("%d\t", fibo(i));
+    }
 
     return 0;
 }
