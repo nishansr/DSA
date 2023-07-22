@@ -22,6 +22,8 @@ int main()
         
     }
     
+    printf("Ascending Order:\n");
+
     for (i = 0; i < 10; i++)
     {
         printf("%d\t",n[i]);
