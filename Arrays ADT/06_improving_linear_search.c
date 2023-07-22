@@ -11,6 +11,8 @@ void swap(int *x, int *y)
     *x = *y;
     *y = temp;
 }
+
+// ! Transposition Method
 int search_transposition(struct Array *arr, int key)
 {
     int i;
@@ -24,6 +26,8 @@ int search_transposition(struct Array *arr, int key)
     }
     return -1;
 }
+
+// ! Moving the key to zeroth index
 int search_move_to_zero(struct Array *arr, int key)
 {
     int i;
