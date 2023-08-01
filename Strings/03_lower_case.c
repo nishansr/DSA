@@ -4,7 +4,7 @@ void lower(char *a)
     int i;
     for (i = 0; a[i] != '\0'; i++)
     {
-        if (a[i] >= 64 && a[i] <= 90)
+        if (a[i] >= 65 && a[i] <= 90)
         {
             a[i] += 32;
         }

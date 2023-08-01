@@ -4,7 +4,10 @@ void capitalize(char *a)
     int i;
     for (i = 0; a[i] != '\0'; i++)
     {
-        a[i] -= 32;
+        if (a[i] >= 97 && a[i] <= 122)
+        {
+            a[i] -= 32;
+        }
     }
 }
 int main()
