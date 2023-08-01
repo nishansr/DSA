@@ -1,3 +1,5 @@
+//! The array must be sorted in ascending order
+
 #include <stdio.h>
 struct Array
 {
