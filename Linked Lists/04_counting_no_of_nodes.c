@@ -7,22 +7,22 @@ struct Node
     struct Node *next;
 };
 
-int count(struct Node *p)
+int sum(struct Node *p)
 {
-    int count = 0;
+    int sum = 0;
     while (p != NULL)
     {
+        sum += p->data;
         p = p->next;
-        count++;
     }
-    return count;
+    return sum;
 }
 
 int main()
 {
     struct Node *head;
     head = (struct Node *)malloc(sizeof(struct Node));
-    head->data = 1;
+    head->data = 40;
     head->next = NULL;
 
     struct Node *current;
@@ -37,7 +37,7 @@ int main()
     latest->next = NULL;
     current->next = latest;
 
-    printf("No. of nodes = %d", count(head));
+    printf("Sum of data = %d", sum(head));
 
     free(head);
 }
