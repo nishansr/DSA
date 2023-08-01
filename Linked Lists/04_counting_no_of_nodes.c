@@ -7,20 +7,22 @@ struct Node
     struct Node *next;
 };
 
-void display(struct Node *p)
+int count(struct Node *p)
 {
-    if (p != NULL)
+    int count = 0;
+    while (p != NULL)
     {
-        printf("%d\t", p->data);
-        display(p->next);
+        p = p->next;
+        count++;
     }
+    return count;
 }
 
 int main()
 {
     struct Node *head;
     head = (struct Node *)malloc(sizeof(struct Node));
-    head->data = 40;
+    head->data = 1;
     head->next = NULL;
 
     struct Node *current;
@@ -35,9 +37,7 @@ int main()
     latest->next = NULL;
     current->next = latest;
 
-    display(head);
+    printf("No. of nodes = %d", count(head));
 
     free(head);
-    free(current);
-    free(latest);
 }

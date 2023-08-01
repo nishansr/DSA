@@ -27,4 +27,5 @@ int main()
     }
 
     free(head);
+    free(current);
 }
