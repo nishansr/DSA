@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 struct Node
 {
@@ -13,4 +14,6 @@ int main()
     n = (struct Node *)malloc(sizeof(struct Node));
     n->data = 40;
     n->next = NULL;
+
+    free(n);
 }
