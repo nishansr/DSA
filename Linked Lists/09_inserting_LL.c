@@ -1,11 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 struct Node
 {
     int data;
     struct Node *next;
-};
+} *first = NULL;
+void create(int A[], int n)
+{
+    int i;
+    struct Node *t, *last;
+    first = (struct Node *)malloc(sizeof(struct Node));
+    first->data = A[0];
+    first->next = NULL;
+    last = first;
+
+    for (i = 1; i < n; i++)
+    {
+        t = (struct Node *)malloc(sizeof(struct Node));
+        t->data = A[i];
+        t->next = NULL;
+        last->next = t;
+        last = t;
+    }
+}
 
 int count(struct Node *p)
 {
@@ -18,105 +35,44 @@ int count(struct Node *p)
     return count;
 }
 
-int insert_atFirst(struct Node *p, int element)
+void Display(struct Node *p)
+{
+    while (p != NULL)
+    {
+        printf("%d ", p->data);
+        p = p->next;
+    }
+}
+void Insert(struct Node *p, int index, int x)
 {
     struct Node *t;
-    t = (struct Node *)malloc(sizeof(struct Node));
-    t->data = element;
-    t->next = p;
-    p = t;
-
-    display(t);
-}
-
-int insert(struct Node *p, int index, int element)
-{
     int i;
-    struct Node *temp;
+
     if (index < 0 || index > count(p))
-    {
         return;
-    }
-    temp = (struct Node *)malloc(sizeof(struct Node));
-    temp->data = element;
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = x;
+
     if (index == 0)
     {
-        temp->next = p;
-        p = temp;
+        t->next = first;
+        first = t;
     }
     else
     {
         for (i = 0; i < index - 1; i++)
-        {
             p = p->next;
-            temp->next = p->next;
-            p->next = p;
-        }
-    }
-    display(p);
-}
-
-void InsertAtEnd(int newItem)
-{
-    struct Node *NewNode;
-    NewNode = getNode();
-    NewNode->data = newItem;
-    NewNode->next = NULL;
-    if (head == NULL)
-    {
-        head = NewNode;
-    }
-    else
-    {
-        temp = head;
-        while (temp->next != NULL)
-        {
-            temp = temp->next;
-        }
-        temp->next = NewNode;
+        t->next = p->next;
+        p->next = t;
     }
 }
-
-void display(struct Node *p)
-{
-    if (p != NULL)
-    {
-        printf("%d\t", p->data);
-        display(p->next);
-    }
-}
-
 int main()
 {
-    int index, element;
 
-    printf("Where do you want to insert: ");
-    scanf("%d", &index);
+    int A[] = {10, 20, 30, 40, 50};
+    create(A, 5);
 
-    printf("What do you want to insert: ");
-    scanf("%d", &element);
-
-    struct Node *head;
-    head = (struct Node *)malloc(sizeof(struct Node));
-    head->data = 40;
-    head->next = NULL;
-
-    struct Node *current;
-    current = (struct Node *)malloc(sizeof(struct Node));
-    current->data = 50;
-    current->next = NULL;
-    head->next = current;
-
-    struct Node *latest;
-    latest = (struct Node *)malloc(sizeof(struct Node));
-    latest->data = 60;
-    latest->next = NULL;
-    current->next = latest;
-
-    insert_atFirst(head, element);
-    insert(head, index, element);
-
-    free(head);
-    free(current);
-    free(latest);
+    Insert(first, 3, 5);
+    Display(first);
+    return 0;
 }
