@@ -1,0 +1,6 @@
+Linked Lists
+    A node is a collection of a data and a pointer which points to the address of next node.
+
+Operations on Linked Lists
+    - display()
+    - insert()
