@@ -1,7 +1,7 @@
 #include <stdio.h>
 void Bubble_sort(int A[], int n)
 {
-    int i, j, tmp;
+    int i, j, tmp, flag = 0;
     for (i = 0; i < n - 1; i++)
     {
         for (j = 0; j < n - 1 - i; j++)
@@ -11,6 +11,12 @@ void Bubble_sort(int A[], int n)
             {
                 A[j] = A[j + 1];
                 A[j + 1] = tmp;
+
+                flag = 1; //! To check if the list is already sorted so i won't repeat
+            }
+            if (flag == 0)
+            {
+                break;
             }
         }
     }
