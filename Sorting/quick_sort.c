@@ -3,38 +3,38 @@
 int partition(int A[], int l, int h)
 {
     int x = l, y = h, p = A[l], tmp;
-    while (x<y)
+    while (x < y)
     {
-        while (A[x]<=p)
+        while (A[x] <= p)
         {
             x++;
         }
-        while (A[y]>p)
+        while (A[y] > p)
         {
             y--;
         }
-        if(x<y)
+        if (x < y)
         {
             tmp = A[x];
             A[x] = A[y];
             A[y] = tmp;
         }
     }
-    
+
     A[l] = A[y];
     A[y] = p;
-    
+
     return y;
 }
 
 void QuickSort(int A[], int l, int h)
 {
     int p;
-    if(l<h)
+    if (l < h)
     {
         p = partition(A, l, h);
-        QuickSort(A, l, p-1);
-        QuickSort(A, p+1, h);
+        QuickSort(A, l, p - 1);
+        QuickSort(A, p + 1, h);
     }
 }
 
