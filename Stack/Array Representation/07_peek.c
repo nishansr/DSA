@@ -44,22 +44,15 @@ void push(struct stack *s, int item)
     }
 }
 //! peek operation
-int peek(struct stack *s, int index)
+void peek(struct stack *s)
 {
     if (isEmpty(s))
     {
         printf("Stack is empty!");
     }
-    else if (s->top < index)
-    {
-        printf("Invalid index.\n");
-        return 0;
-    }
     else
     {
-        int item;
-        item = s->items[index];
-        return item;
+        printf("Top of the stack is %d.\n", s->items[s->top]);
     }
 }
 void display(struct stack *s)
@@ -93,14 +86,9 @@ int main()
     printf("Enter the index: ");
     scanf("%d", &index);
 
-    res = peek(&s, index); 
+    peek(&s);
 
     display(&s);
 
-    if (res)
-    {
-        printf("The item in the %d index is %d.", index, res);
-    }
-    
     return 0;
 }

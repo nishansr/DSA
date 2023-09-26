@@ -59,22 +59,15 @@ int pop(struct stack *s)
         return item;
     }
 }
-int peek(struct stack *s, int index)
+void peek(struct stack *s)
 {
     if (isEmpty(s))
     {
         printf("Stack is empty!");
     }
-    else if (s->top < index)
-    {
-        printf("Invalid index.\n");
-        return 0;
-    }
     else
     {
-        int item;
-        item = s->items[index];
-        return item;
+        printf("Top of the stack is %d.\n", s->items[s->top]);
     }
 }
 void display(struct stack *s)
@@ -124,13 +117,7 @@ int main()
             break;
 
         case 4:
-            printf("Enter index to visit: ");
-            scanf("%d", &p);
-            res = peek(&s, p);
-            if (res)
-            {
-                printf("Item is index %d is %d.\n", p, res);
-            }
+            peek(&s);
             break;
 
         default:
