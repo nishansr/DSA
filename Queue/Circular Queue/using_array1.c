@@ -1,17 +1,21 @@
+//! Array implementation of circular queue without sacrificing one cell using count variable
+
 #include <stdio.h>
 #define MAX 10
 struct queue
 {
-    int rear, front, items[MAX];
+    int front, rear, count;
+    int items[MAX];
 };
-void createEmptyQueue(struct queue *q)
+void createEmptyStack(struct queue *q)
 {
-    q->rear = -1;
-    q->front = 0;
+    q->front = MAX - 1;
+    q->rear = MAX - 1;
+    q->count = 0;
 }
 int isEmpty(struct queue *q)
 {
-    if (q->rear < q->front)
+    if (q->count == 0)
     {
         return 1;
     }
@@ -22,7 +26,7 @@ int isEmpty(struct queue *q)
 }
 int isFull(struct queue *q)
 {
-    if (q->rear == MAX - 1)
+    if (q->count == MAX)
     {
         return 1;
     }
@@ -35,58 +39,59 @@ void enqueue(struct queue *q, int item)
 {
     if (isFull(q))
     {
-        printf("Queue is full!");
+        printf("Queue is full!!");
     }
     else
     {
-        q->rear++;
+        q->rear = (q->rear + 1) % MAX;
         q->items[q->rear] = item;
+        q->count++;
     }
 }
-int dequeue(struct queue *q)
+void dequeue(struct queue *q)
 {
     if (isEmpty(q))
     {
-        printf("Queue is Empty!");
+        printf("Queue is empty!!");
     }
     else
     {
-        int item;
-        item = q->items[q->front];
-        q->front++;
-
-        return item;
+        q->front = (q->front + 1) % MAX;
+        printf("\nDequeued item : %d\n", q->items[q->front]);
+        q->count--;
     }
 }
-void traverse(struct queue *q)
+void display(struct queue *q)
 {
     if (isEmpty(q))
     {
-        printf("Queue is empty!");
-        return;
+        printf("Queue is empty!!");
     }
     else
     {
         int i;
-        for (i = q->rear; i >= q->front; i--)
+        printf("Items in the queue are: ");
+        for (i = (q->front + 1) % MAX; i != q->rear; i = (i + 1) % MAX)
         {
             printf("%d\t", q->items[i]);
         }
+        printf("%d", q->items[q->rear]);
     }
 }
+
 int main()
 {
-    int data, ch, res;
+    int ch, data;
     struct queue q;
-    createEmptyQueue(&q);
+    createEmptyStack(&q);
 
     printf("------------MENU FOR PROGRAM------------\n");
     printf("1:Enqueue\n2:Dequeue\n3:Traverse\n4:exit\n");
-
     do
     {
-        printf("Enter your choice: ");
+        printf("\nEnter your choice: ");
         scanf("%d", &ch);
+
         switch (ch)
         {
         case 1:
@@ -94,21 +99,17 @@ int main()
             scanf("%d", &data);
             enqueue(&q, data);
             break;
-
         case 2:
-            res = dequeue(&q);
-            printf("Deleted item: %d\n", res);
+            dequeue(&q);
             break;
-
         case 3:
-            printf("Items is the queue are: ");
-            traverse(&q);
+            display(&q);
             break;
 
         default:
+            exit(1);
             break;
         }
-
     } while (ch < 4);
 
     return 0;

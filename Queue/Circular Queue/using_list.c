@@ -5,64 +5,68 @@ struct queue
     int data;
     struct queue *next;
 };
-struct queue *front = NULL, *rear = NULL;
+struct queue *q = NULL;
+
 void enqueue(int item)
 {
     struct queue *tmp;
     tmp = (struct queue *)malloc(sizeof(struct queue));
     tmp->data = item;
     tmp->next = NULL;
-    if (rear == NULL)
+    if (q == NULL)
     {
-        rear = tmp;
-        front = tmp;
+        q = tmp;
     }
     else
     {
-        rear->next = tmp;
-        rear = tmp;
+        struct queue *last = q;
+        while (last->next != NULL)
+        {
+            last = last->next;
+        }
+        last->next = tmp;
     }
 }
 void dequeue()
 {
     struct queue *tmp;
-    tmp = front;
-    if (front == NULL)
+    if (q == NULL)
     {
         printf("Queue is empty!!");
     }
-    else if (front->next == NULL)
+    else if (q->next == NULL)
     {
-        rear = NULL;
-        front = NULL;
-        printf("Dequeued item is %d.\n", tmp->data);
-        free(tmp);
+        printf("Dequeued Item: %d\n", q->data);
+        q = NULL;
     }
     else
     {
-        front = front->next;
-        printf("Dequeued item is %d.\n", tmp->data);
+        tmp = q->next;
+        q->next = tmp->next;
+        printf("Dequeued Item: %d\n", tmp->data);
         free(tmp);
     }
 }
 void display()
 {
     struct queue *tmp;
-    if (front == NULL)
+    if (q == NULL)
     {
         printf("Queue is empty");
     }
     else
     {
-        tmp = front;
+        tmp = q;
         printf("Items in the queue are: ");
         while (tmp != NULL)
         {
             printf("%d\t", tmp->data);
             tmp = tmp->next;
         }
+        printf("\n");
     }
 }
+
 int main()
 {
     int ch, data;
@@ -70,7 +74,7 @@ int main()
     printf("1:Enqueue\n2:Dequeue\n3:Traverse\n4:exit\n");
     do
     {
-        printf("Enter your choice: ");
+        printf("\nEnter your choice: ");
         scanf("%d", &ch);
 
         switch (ch)
@@ -88,9 +92,17 @@ int main()
             break;
 
         default:
+            exit(1);
             break;
         }
     } while (ch < 4);
+
+    enqueue(5);
+    enqueue(5);
+    enqueue(5);
+    enqueue(5);
+
+    display();
 
     return 0;
 }
